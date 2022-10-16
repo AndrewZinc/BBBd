@@ -4,7 +4,6 @@ function init() {
   // Use the list of sample names to populate the select options
   d3.json("./static/js/samples.json").then((data) => {
     var sampleNames = data.names;
-
     sampleNames.forEach((sample) => {
       selector
         .append("option")
@@ -19,14 +18,17 @@ function init() {
   });
 };
 
+
 // Initialize the dashboard
 init();
 
- // Fetch new data each time a new sample is selected
+
+// Fetch new data each time a new sample is selected
 function optionChanged(newSample) {
   buildMetadata(newSample);
   buildCharts(newSample);
 };
+
 
 // Demographics Panel 
 function buildMetadata(sample) {
@@ -48,35 +50,98 @@ function buildMetadata(sample) {
   });
 };
 
-// Create the buildCharts function.
+
 function buildCharts(sample) {
-  // 2. Use d3.json to load and retrieve the samples.json file 
+  // Use d3.json to load and retrieve the samples.json file 
   d3.json("./static/js/samples.json").then((data) => {
-    // 3. Create a variable that holds the samples array. 
+    var samples = data.samples;
+    // Filter the samples for the object with the desired sample number.
+    var sampleArray = samples.filter(sampleObj => sampleObj.id == sample);
+    //  Collect the first sample in the array.
+    var sampleZero = sampleArray[0];
 
-    // 4. Create a variable that filters the samples for the object with the desired sample number.
+    console.log("+++++ Sample Zero ++++++");
+    console.log(sampleZero);
 
-    //  5. Create a variable that holds the first sample in the array.
+    // Create variables that hold the otu_ids, otu_labels, and sample_values.
+    var otu_ids = sampleZero.otu_ids;
+    var otu_labels = sampleZero.otu_labels;
+    var sample_values = sampleZero.sample_values;
 
+    var toptenSampleVals = (sampleZero.sample_values).sort((a,b) => b-a).slice(0, 10).reverse();
+    console.log(toptenSampleVals);
 
-    // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    var toptenOtuIDs = (sampleZero.otu_ids).slice(0, 10).reverse();
+    console.log(toptenOtuIDs);
 
+    var toptenOtuLabels = (sampleZero.otu_labels).slice(0, 10).reverse();
+    console.log(toptenOtuLabels);
 
-    // 7. Create the yticks for the bar chart.
-    // Hint: Get the the top 10 otu_ids and map them in descending order  
-    //  so the otu_ids with the most bacteria are last. 
+    // Create the yticks for the bar chart.
 
-    var yticks = [];
+    var yticks = [(sampleZero.otu_ids).slice(0, 10).map( value => "OTU "+value).reverse()];
+    console.log("yticks = " + yticks);
 
-    // 8. Create the trace for the bar chart. 
-    var barData = [
-      
-    ];
-    // 9. Create the layout for the bar chart. 
+    // Create the trace for the bar chart. 
+    var barData = [{
+      type: 'bar',
+      x: toptenSampleVals,
+      y: toptenOtuIDs,
+      orientation: 'h',
+      hoverinfo: "text",
+      hovertext: toptenOtuLabels
+    }];
+    // Create the layout for the bar chart. 
     var barLayout = {
-     
+      title: "Top 10 Bacteria Cultures Found",
+      height: 600,
+      width: 800,
+      xaxis: {title: "Sample Values"},
+      yaxis: {
+        title: 'OTU IDs'
+        , type: 'category'
+        , categoryorder: 'array'
+        , categoryarray: 'yticks'}
     };
-    // 10. Use Plotly to plot the data with the layout. 
-    
+    // Use Plotly to plot the bar chart data with the layout. 
+    Plotly.newPlot("bar", barData, barLayout);
+
+    // Create the trace for the bubble chart.
+    var bubbleData = [{
+      x: otu_ids,
+      y: sample_values,
+      text: otu_labels,
+      type: 'scatter',
+      mode: 'markers',
+      marker: {
+        color: otu_ids,
+        line: {
+          color: 'rgba(165, 196, 50, 1)',
+          width: 1,
+        },
+        size: sample_values,
+        sizemode: 'diameter'}
+    }];
+
+    // Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: 'Bacteria Cultures Per Sample',
+      xaxis: {title: 'OTU IDs'},
+      yaxis: {title: 'Sample Values'},
+      showlegend: false,
+      hovermode: 'closest',
+      height: 600,
+      width: 1000
+    };
+
+    // Use Plotly to plot the bubble chart data with the layout.
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+
+
+//        colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844'],
+//    colorscale: [[0, '#e7a4b6'], [0.25, '#cd7eaf'], [0.45, '#a262a9'], [0.65, '#6f4d96'], [0.85, '#3d3b72'], [1, '#182844']],
+
+
   });
 };
