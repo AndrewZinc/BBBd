@@ -1,0 +1,7 @@
+body{
+    background-color: #e6f7ff;
+}
+.jumbotron {
+    background-image: url("../img/dna-bacterias.jpg");
+    background-size: cover;
+  }
