@@ -64,9 +64,6 @@ function buildCharts(sample) {
     var resultArr = metadat.filter(sampleObj => sampleObj.id == sample);
     var resultZero = resultArr[0];
 
-    console.log("+++++ Sample Zero ++++++");
-    console.log(sampleZero);
-
     // Create variables that hold the otu_ids, otu_labels, and sample_values. (BUBBLE CHART)
     var otu_ids = sampleZero.otu_ids;
     var otu_labels = sampleZero.otu_labels;
@@ -74,23 +71,16 @@ function buildCharts(sample) {
 
     // Create Top Ten variables for the otu_ids, otu_labels, and sample_values. (BAR CHART)
     var toptenSampleVals = (sampleZero.sample_values).sort((a,b) => b-a).slice(0, 10).reverse();
-    console.log(toptenSampleVals);
-
     var toptenOtuIDs = (sampleZero.otu_ids).slice(0, 10).reverse();
-    console.log(toptenOtuIDs);
-
     var toptenOtuLabels = (sampleZero.otu_labels).slice(0, 10).reverse();
-    console.log(toptenOtuLabels);
 
-    // Create a variable that holds the washing frequency. (GAUGE CHART)
+    // Create a float variable that holds the washing frequency. (GAUGE CHART)
     var washFreq = parseFloat(resultZero.wfreq);
-    console.log("washing frequency = " +washFreq);
 
     // Create the yticks for the bar chart.
-
     var yticks = [(sampleZero.otu_ids).slice(0, 10).map( value => "OTU "+value).reverse()];
-    console.log("yticks = " + yticks);
 
+    //---------------------------------------------------------------------------
     // Create the trace for the bar chart. 
     var barData = [{
       type: 'bar',
@@ -100,26 +90,36 @@ function buildCharts(sample) {
       hoverinfo: "text",
       hovertext: toptenOtuLabels
     }];
+
     // Create the layout for the bar chart. 
     var barLayout = {
       title: "Top 10 Bacteria Cultures Found",
       plot_bgcolor:"#e6f7ff",
       paper_bgcolor:"#e6f7ff",
-      height: 600,
+      height: 500,
       width: 600,
-      xaxis: {title: "Sample Values"},
+      xaxis: {
+        showline: true
+      },
       yaxis: {
-        title: 'OTU IDs'
-        , type: 'category'
-        , categoryorder: 'array'
-        , categoryarray: 'yticks'}
+        ticks: 'outside',
+        type: 'category',
+        categoryorder: 'array',
+        categoryarray: 'yticks'
+      },
+      margin: { t: 30, b: 30},
+      modebar: {
+        orientation: 'v'
+      }
     };
 
+    // Create the config for the bar chart.
     var barConfig = {responsive: true, displaylogo: false};
 
     // Use Plotly to plot the bar chart data with the layout. 
     Plotly.newPlot("bar", barData, barLayout, barConfig);
 
+    //---------------------------------------------------------------------------
     // Create the trace for the bubble chart.
     var bubbleData = [{
       x: otu_ids,
@@ -142,11 +142,10 @@ function buildCharts(sample) {
       title: 'Bacteria Cultures Per Sample',
       xaxis: {
         title: 'OTU IDs',
-        automargin: 'true'
+        automargin: true
       },
       yaxis: {
-        title: 'Sample Values',
-        automargin: 'true'
+        automargin: true
       },
       plot_bgcolor:"#e6f7ff",
       paper_bgcolor:"#e6f7ff",
@@ -154,23 +153,18 @@ function buildCharts(sample) {
       hovermode: 'closest',
       height: 600,
       width: 1100,
+      margin: {b: 35},
       displaylogo: false
     };
 
-
+    // Create the config for the bubble chart.
     var bubbleConfig = {responsive: true, displaylogo: false};
 
     // Use Plotly to plot the bubble chart data with the layout.
     Plotly.newPlot("bubble", bubbleData, bubbleLayout, bubbleConfig);
 
-
-
-//        colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844'],
-//    colorscale: [[0, '#e7a4b6'], [0.25, '#cd7eaf'], [0.45, '#a262a9'], [0.65, '#6f4d96'], [0.85, '#3d3b72'], [1, '#182844']],
-
-
-
-    // 4. Create the trace for the gauge chart.
+    //---------------------------------------------------------------------------
+    // Create the trace for the gauge chart.
     var gaugeData = [
       {
         domain: { x: [0, 1], y: [0, 1] },
@@ -204,17 +198,11 @@ function buildCharts(sample) {
       margin: { l: 0, r: 0, t: 0, b: 0 }
     };
 
+    // Create the config for the gauge chart.
     var gaugeConfig = {responsive: true, displaylogo: false};
 
-    // 6. Use Plotly to plot the gauge data and layout.
+    // Use Plotly to plot the gauge data and layout.
     Plotly.newPlot("gauge", gaugeData, gaugeLayout, gaugeConfig);
-
-
-
-
-
-
-
 
   });
 };

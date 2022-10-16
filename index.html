@@ -9,13 +9,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/bacteria.css">
 </head>
-
 <body>
-
+  <nav>
+    <ul>
+      <h4>Chart Selection</h4>
+      <li><a href="#bar">Bar Chart</a>&nbsp;&nbsp;&nbsp;<a href="#bubble">Bubble Chart</a>&nbsp;&nbsp;&nbsp;<a href="#gauge">Gauge</a></li>
+    </ul>
+  </nav>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h2><b>Belly Button Biodiversity Dashboard</b></h2>
+        <h1><b>Belly Button Biodiversity Dashboard</b></h1>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
@@ -32,17 +36,26 @@
           </div>
           <div id="sample-metadata" class="panel-body"></div>
         </div>
+        <p>Select the Subject ID from the dropdown above, and this panel displays the Subject's Demographic Info.</p>
       </div>
       <div class="col-md-5">
           <div id="bar"></div>
+          <p>The Bar Chart displays the bacterial cultures that appear within the Subject's sample.  Only the top ten (most populous) cultures are displayed.</p>
       </div>
       <div class="col-md-5">
           <div id="gauge"></div>
+          <p>The Gauge displays the Subject's belly button washing frequency.&nbsp;This information tends to correlate with the number of cultures that reside inside the belly button.<br><br>In general, less washing yields a greater range of cultures.</p>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div id="bubble"></div>
+        <div class="center-screen">
+          <div id="bubble"></div>
+          <p>The Bubble Chart displays the total bacterial population that was detected within the Subject's sample. The bubble size is proportional to the population of a given bacterial strain.</p>
+        </div>
+      </div>
     </div>
+    <div class="well well-sm">
+      <p>Jumbotron <a href="https://www.freepik.com/free-photo/dna-bacterias_923816.htm#query=bacteria&position=14&from_view=search&track=sph">Image by kjpargeter</a> on Freepik</p>
     </div>
   </div>
 

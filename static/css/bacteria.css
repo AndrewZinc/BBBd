@@ -4,4 +4,11 @@ body{
 .jumbotron {
     background-image: url("../img/dna-bacterias.jpg");
     background-size: cover;
-  }
+}
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center
+}
