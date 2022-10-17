@@ -1,9 +1,11 @@
 # BBBd - Belly Button Biodiversity Dashboard
-![Jumbotron image](https://file%2B.vscode-resource.vscode-cdn.net/c%3A/Users/AZ/Github/BBBd/static/img/dna-bacterias.jpg?version%3D1665966729224)
+![Jumbotron image](Static/img/dna-bacterias.jpg)
 ## Overview
 A research study has collected samples from the belly buttons of a variety of volunteer subjects.  It is believed that one or more strains of this bacteria may become an ingredient in a novel food.
 
 This project developed a website that allows the user to interactively explore data about the bacteria discovered within the belly buttons of volunteers.
+
+![BBBd Website Overview](Resources/BBBd.png)
 
 ## Technology
 This project included the following technologies:
