@@ -1,5 +1,5 @@
 # BBBd - Belly Button Biodiversity Dashboard
-![Jumbotron image](Static/img/dna-bacterias.jpg)
+![Jumbotron image](/static/img/dna-bacterias.jpg)
 ## Overview
 A research study has collected samples from the belly buttons of a variety of volunteer subjects.  It is believed that one or more strains of this bacteria may become an ingredient in a novel food.
 
