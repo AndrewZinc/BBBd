@@ -13,7 +13,7 @@
   <nav>
     <ul>
       <h4>Chart Selection</h4>
-      <li><a href="#bar">Bar Chart</a>&nbsp;&nbsp;&nbsp;<a href="#bubble">Bubble Chart</a>&nbsp;&nbsp;&nbsp;<a href="#gauge">Gauge</a></li>
+      <a href="#bar">Bar Chart</a>&nbsp;&nbsp;&nbsp;<a href="#bubble">Bubble Chart</a>&nbsp;&nbsp;&nbsp;<a href="#gauge">Gauge</a>
     </ul>
   </nav>
   <div class="container-fluid">
@@ -38,11 +38,12 @@
         </div>
         <p>Select the Subject ID from the dropdown above, and this panel displays the Subject's Demographic Info.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
           <div id="bar"></div>
           <p>The Bar Chart displays the bacterial cultures that appear within the Subject's sample.  Only the top ten (most populous) cultures are displayed.</p>
+          <p>Hover your mouse pointer over any of the chart bars to see which bacterial cultures account for the sample value.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
           <div id="gauge"></div>
           <p>The Gauge displays the Subject's belly button washing frequency.&nbsp;This information tends to correlate with the number of cultures that reside inside the belly button.<br><br>In general, less washing yields a greater range of cultures.</p>
     </div>
@@ -50,7 +51,12 @@
       <div class="col-md-12">
         <div class="center-screen">
           <div id="bubble"></div>
-          <p>The Bubble Chart displays the total bacterial population that was detected within the Subject's sample. The bubble size is proportional to the population of a given bacterial strain.</p>
+            <p>The Bubble Chart displays the total bacterial population that was detected within the Subject's sample. The bubble size is proportional to the population of a given bacterial strain.</p>
+            <ul><h4>Chart Controls</h4>
+              <li>Hover your mouse pointer over any of the chart bubbles to see which bacterial cultures account for the sample value.</li>
+              <li>Use your mouse wheel to zoom in or out, or click and drag to zoom into an area of interest.</li>
+              <li>Use the <i>Reset axes</i> control on the Mode bar to reset the chart display.</li>
+            </ul>
         </div>
       </div>
     </div>

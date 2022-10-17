@@ -87,7 +87,7 @@ function buildCharts(sample) {
       x: toptenSampleVals,
       y: toptenOtuIDs,
       orientation: 'h',
-      hoverinfo: "text",
+      hoverinfo: 'text',
       hovertext: toptenOtuLabels
     }];
 
@@ -96,8 +96,6 @@ function buildCharts(sample) {
       title: "Top 10 Bacteria Cultures Found",
       plot_bgcolor:"#e6f7ff",
       paper_bgcolor:"#e6f7ff",
-      height: 500,
-      width: 600,
       xaxis: {
         showline: true
       },
@@ -117,7 +115,7 @@ function buildCharts(sample) {
     var barConfig = {responsive: true, displaylogo: false};
 
     // Use Plotly to plot the bar chart data with the layout. 
-    Plotly.newPlot("bar", barData, barLayout, barConfig);
+    Plotly.newPlot('bar', barData, barLayout, barConfig);
 
     //---------------------------------------------------------------------------
     // Create the trace for the bubble chart.
@@ -147,35 +145,33 @@ function buildCharts(sample) {
       yaxis: {
         automargin: true
       },
-      plot_bgcolor:"#e6f7ff",
-      paper_bgcolor:"#e6f7ff",
+      plot_bgcolor:'#e6f7ff',
+      paper_bgcolor:'#e6f7ff',
       showlegend: false,
       hovermode: 'closest',
       height: 600,
       width: 1100,
-      margin: {b: 35},
       displaylogo: false
     };
 
     // Create the config for the bubble chart.
-    var bubbleConfig = {responsive: true, displaylogo: false};
+    var bubbleConfig = {responsive: true, scrollZoom: true, displaylogo: false};
 
     // Use Plotly to plot the bubble chart data with the layout.
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout, bubbleConfig);
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout, bubbleConfig);
 
     //---------------------------------------------------------------------------
     // Create the trace for the gauge chart.
     var gaugeData = [
       {
-        domain: { x: [0, 1], y: [0, 1] },
         value: washFreq,
         title: {
           text:
             "Belly Button Washing Frequency<br><span style='font-size:0.8em;color:gray'>Scrubs Per Week</span>"
         },
-        type: "indicator",
-        align: "center",
-        mode: "gauge+number", 
+        type: 'indicator',
+        align: 'center',
+        mode: 'gauge+number', 
         gauge: {
             axis: { range: [null, 10] },
               steps: [
@@ -191,18 +187,15 @@ function buildCharts(sample) {
     
     // Create the layout for the gauge chart.
     var gaugeLayout = { 
-      width: 450,
-      height: 450,
-      plot_bgcolor:"#e6f7ff",
-      paper_bgcolor:"#e6f7ff",
-      margin: { l: 0, r: 0, t: 0, b: 0 }
+      plot_bgcolor:'#e6f7ff',
+      paper_bgcolor:'#e6f7ff',
     };
 
     // Create the config for the gauge chart.
     var gaugeConfig = {responsive: true, displaylogo: false};
 
     // Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot("gauge", gaugeData, gaugeLayout, gaugeConfig);
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout, gaugeConfig);
 
   });
 };
